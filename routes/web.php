@@ -9,6 +9,7 @@ use App\Http\Controllers\UserList2Controller;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\SenaraiAgensiController;
 use App\Http\Controllers\BelanjawanController;
+use App\Http\Controllers\MengurusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,13 @@ Route::prefix('belanjawan')->group(function () {
     Route::post('store', [BelanjawanController::class, 'store']);
     Route::post('edit', [BelanjawanController::class, 'edit']);
     Route::delete('destroy', [BelanjawanController::class, 'destroy']);
+});
+
+Route::prefix('mengurus')->group(function () {
+    Route::get('index', [MengurusController::class, 'index']);
+    Route::post('store', [MengurusController::class, 'store']);
+    Route::post('edit', [MengurusController::class, 'edit']);
+    Route::delete('destroy', [MengurusController::class, 'destroy']);
 });
 
 

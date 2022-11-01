@@ -368,8 +368,8 @@ $(document).ready(function () {
         $('#saveBtn').html('Simpan');
         var id = $(this).data('id'); // row id
         var userid = $(this).data('user_id');
-        alert(id);
-        alert(userid); // undefined
+       // alert(id);
+        //alert(userid); // undefined
         $.ajax({
             type:"POST",
             url: "{{ url('belanjawan/edit') }}",

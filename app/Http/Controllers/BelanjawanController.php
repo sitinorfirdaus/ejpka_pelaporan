@@ -55,9 +55,9 @@ class BelanjawanController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        dd($request);
+    //    dd($request);
         Belanjawan::updateOrCreate(
-           ['id' => $request->id], //akan dapat row id from previous. not request->id
+         //  ['id' => $request->id], //akan dapat row id from previous. not request->id
             [
               // 'nama_agensi' => $request->agensi,
                'input1'=>$request->input1,

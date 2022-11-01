@@ -12,7 +12,7 @@ class Belanjawan extends Model
     protected $fillable = [
 
       // 'nama_agensi',
-        'id',
+      //  'id',
         'input1',
         'input2',
         'output1',
