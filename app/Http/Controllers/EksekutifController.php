@@ -8,9 +8,9 @@ use Yajra\DataTables\DataTables;
 use App\Models\Belanjawan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Mengurus;
+use App\Models\Eksekutif;
 
-class BelanjawanController extends Controller
+class EksekutifController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +20,8 @@ class BelanjawanController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Belanjawan::latest()->get();
-            // dd(json_encode($data));
+            $data = Eksekutif::latest()->get();
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -34,7 +34,7 @@ class BelanjawanController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('senaraibelanjawan');
+        return view('ringkasanEksekutif/index');
     }
 
     /**
@@ -56,21 +56,15 @@ class BelanjawanController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-      //  $mengurus = Mengurus::select('id')->get();
 
-   // dd($mengurus);
-        Belanjawan::updateOrCreate(
+
+        Eksekutif::updateOrCreate(
            ['id' => $request->id], //akan dapat row id from previous
             [
-              // 'nama_agensi' => $request->agensi,
-               'input1'=>$request->input1,
-               'input2'=>$request->input2,
-               'output1'=>$request->output1,
-               'input3'=>$request->input3,
-               'input4'=>$request->input4,
-               'output2'=>$request->output2,
-               'output3'=>$request->output3,
-           //   'id_mengurus'=>$mengurus->id_megurus,//insert id mmengurus dari table mengurus
+
+               'sukuan'=>$request->sukuan,
+               'tahun'=>$request->tahun,
+               'tarikh'=>$request->tarikh,
                'user_id' => $user->id // insert user id from session
             ]
         );
@@ -104,7 +98,7 @@ class BelanjawanController extends Controller
             'id' => $request->id // bawak row id
         ];
 
-        $bel = Belanjawan::where($where)->first();
+        $bel = Eksekutif::where($where)->first();
 
         // dd($bel);
 
@@ -131,7 +125,7 @@ class BelanjawanController extends Controller
      */
     public function destroy(Request $request)
     {
-        $post = Belanjawan::where('id', $request->id)->delete();
+        $post = Eksekutif::where('id', $request->id)->delete();
         return response()->json([
             'success' => 'Post deleted successfully.'
         ]);

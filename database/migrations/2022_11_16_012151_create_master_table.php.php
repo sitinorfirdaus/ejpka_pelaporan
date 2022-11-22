@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mengurus', function (Blueprint $table) {
+        Schema::create('master', function (Blueprint $table) {
             $table->id();
-            $table->interger('master_id');
-            $table->string('melebihi penjelasan');
-            $table->string('melebihi tindakan');
-            $table->string('kurang penjelasan');
-            $table->string('kurang tindakan');
-            $table->interger('user_id');
+            $table->integer('sukuan');
+            $table->year('tahun');
+            $table->date('tarikh');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mengurus');
+        //
     }
 };

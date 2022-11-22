@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Mengurus extends Model
 {
     use HasFactory;
+    protected $table = 'mengurus';
+    protected $fillable =[
+    'master_id',
+    'melebihi_penjelasan',
+    'melebihi_tindakan',
+    'kurang_penjelasan',
+    'kurang_tindakan',
+    'user_id'
+    ];
+
 }

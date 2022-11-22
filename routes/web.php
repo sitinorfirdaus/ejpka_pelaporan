@@ -10,7 +10,8 @@ use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\SenaraiAgensiController;
 use App\Http\Controllers\BelanjawanController;
 use App\Http\Controllers\MengurusController;
-
+use App\Http\Controllers\EksekutifController;
+use App\Http\Controllers\RingkasanEksekutifController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,9 +69,31 @@ Route::prefix('mengurus')->group(function () {
     Route::post('store', [MengurusController::class, 'store']);
     Route::post('edit', [MengurusController::class, 'edit']);
     Route::delete('destroy', [MengurusController::class, 'destroy']);
+    Route::post('update/{id}', [MengurusController::class, 'update']);
+    Route::get('form', [MengurusController::class, 'form']);
+//Route::post('form',[MengurusController::class, 'form']);
+Route::get('store2', [MengurusController::class, 'store2']);
 });
 
 
+Route::prefix('master')->group(function () {
+    Route::get('index', [EksekutifController::class, 'index']);
+    Route::post('store', [EksekutifController::class, 'store']);
+    Route::post('edit', [EksekutifController::class, 'edit']);
+    Route::delete('destroy', [EksekutifController::class, 'destroy']);
+    Route::post('update/{id}', [EksekutifController::class, 'update']);
+    Route::get('form', [MengurusController::class, 'form']);
+
+});
+
+Route::prefix('ringkasan_eksekutif')->group(function () {
+    Route::get('index', [RingkasanEksekutifController::class, 'index']);
+    Route::post('store', [RingkasanEksekutifController::class, 'store']);
+    Route::post('edit', [RingkasanEksekutifController::class, 'edit']);
+    Route::delete('destroy', [RingkasanEksekutifController::class, 'destroy']);
+    Route::post('update/{id}', [RingkasanEksekutifController::class, 'update']);
+    Route::get('form', [RingkasanEksekutifController::class, 'form']);
+});
 
 
 

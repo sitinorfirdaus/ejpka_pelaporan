@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Belanjawan;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Mengurus;
+use App\Models\Ringkasan_Eksekutif;
+use App\Models\Eksekutif;
+use DB;
 
-class BelanjawanController extends Controller
+class RingkasanEksekutifController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +20,10 @@ class BelanjawanController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
-            $data = Belanjawan::latest()->get();
-            // dd(json_encode($data));
+            $data = Ringkasan_Eksekutif::latest()->get();
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -34,7 +36,7 @@ class BelanjawanController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('senaraibelanjawan');
+        return view('ringkasanEksekutif/ringkasaneksekutif');
     }
 
     /**
@@ -55,27 +57,27 @@ class BelanjawanController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-      //  $mengurus = Mengurus::select('id')->get();
 
-   // dd($mengurus);
-        Belanjawan::updateOrCreate(
+        $user = Auth::user();
+
+        $master = Eksekutif::orderBy('id','desc')->take(1)->first();
+
+        Ringkasan_Eksekutif::updateOrCreate(
            ['id' => $request->id], //akan dapat row id from previous
             [
-              // 'nama_agensi' => $request->agensi,
+              'master_id' =>$master->id,
                'input1'=>$request->input1,
                'input2'=>$request->input2,
                'output1'=>$request->output1,
                'input3'=>$request->input3,
                'input4'=>$request->input4,
                'output2'=>$request->output2,
-               'output3'=>$request->output3,
-           //   'id_mengurus'=>$mengurus->id_megurus,//insert id mmengurus dari table mengurus
                'user_id' => $user->id // insert user id from session
             ]
         );
 
-        return response()->json(['success' => 'Save success']);
+       return response()->json(['success' => 'Save success']);
+       // return response()->json(array('success' => true, 'last_insert_id' => $master->id), 200);
     }
 
     /**
@@ -87,6 +89,12 @@ class BelanjawanController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function form(Request $request)
+    {
+      //  return view(('ringkasanEksekutif/ringkasaneksekutif').'#tab3')->with('message','sucessfull');
+       // return view('ringkasanEksekutif/ringkasaneksekutif');
     }
 
     /**
