@@ -89,7 +89,8 @@ Route::prefix('master')->group(function () {
 Route::prefix('ringkasan_eksekutif')->group(function () {
     Route::get('index', [RingkasanEksekutifController::class, 'index']);
     Route::post('store', [RingkasanEksekutifController::class, 'store']);
-    Route::post('edit', [RingkasanEksekutifController::class, 'edit']);
+   // Route::post('edit', [RingkasanEksekutifController::class, 'edit']);
+    Route::get('edit/{id}', [RingkasanEksekutifController::class, 'edit']);
     Route::delete('destroy', [RingkasanEksekutifController::class, 'destroy']);
     Route::post('update/{id}', [RingkasanEksekutifController::class, 'update']);
     Route::get('form', [RingkasanEksekutifController::class, 'form']);

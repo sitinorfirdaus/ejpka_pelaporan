@@ -69,6 +69,7 @@ class MengurusController extends Controller
     public function store(Request $request)
     {
 
+       // return $request;
         $user = Auth::user();
 
 

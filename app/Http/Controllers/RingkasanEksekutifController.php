@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Ringkasan_Eksekutif;
 use App\Models\Eksekutif;
 use DB;
+use App\Http\Requests\StoreRERequests;
 
 class RingkasanEksekutifController extends Controller
 {
@@ -21,22 +22,28 @@ class RingkasanEksekutifController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->ajax()) {
-            $data = Ringkasan_Eksekutif::latest()->get();
+        // if ($request->ajax()) {
+        //     $data = Ringkasan_Eksekutif::latest()->get();
 
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->addColumn('action', function ($row) {
 
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Kemaskini</a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Padam</a>';
+        //             $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Kemaskini</a>';
+        //             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Padam</a>';
 
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-        return view('ringkasanEksekutif/ringkasaneksekutif');
+        //             return $btn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        // }
+
+        $users = Ringkasan_Eksekutif::all();
+
+
+        return view('ringkasanEksekutif/ringkasaneksekutif',compact('users'));
+
+        //return view('ringkasanEksekutif/ringkasaneksekutif');
     }
 
     /**
@@ -55,8 +62,9 @@ class RingkasanEksekutifController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRERequests $request)
     {
+
 
         $user = Auth::user();
 
@@ -103,20 +111,21 @@ class RingkasanEksekutifController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
 
 
+        // $where = [
+        //     'id' => $request->id // bawak row id
+        // ];
 
-        $where = [
-            'id' => $request->id // bawak row id
-        ];
+        $bel = Ringkasan_Eksekutif::select('id','input1')
+                ->where('id','=','1')
+                ->get();
+       // return($bel);
 
-        $bel = Belanjawan::where($where)->first();
-
-        // dd($bel);
-
-        return response()->json($bel);
+       // return response()->json($bel);
+       return view('ringkasanEksekutif/ringkasaneksekutifEdit',compact('bel'));
     }
 
     /**

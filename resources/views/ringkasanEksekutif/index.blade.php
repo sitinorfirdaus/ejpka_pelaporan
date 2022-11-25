@@ -119,6 +119,57 @@
     </ul>
 
 <div class="tab-content">--}}
+
+    <div class="row row-sm">
+        <div class="col-xl-14">
+            <div class="card">
+                <div class="card-body"><h2>KEKERAPAN MESYUARAT</h2>
+                        <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
+                        <input type="hidden" name="id" id="id">  <!--pull row id data -->
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-label">Kementerian/Jabatan </label>
+                                </div>
+                                <div class="col-md-3">
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "MOF" disabled/>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">No Rujukan </label>
+                                </div>
+                                <div class="col-md-3">
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "MOF" disabled/>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-label">Laporan Suku Tahun </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "Suku kedua" disabled/>
+                                </div>
+                                <div class="col-md-2">
+                                   <label class="form-label">Tahun</label>
+                               </div>
+                                   <div class="col-md-2">
+                                      <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" value="2022" disabled />
+                                   </div>
+                               </div>
+
+
+                            </div>
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- row opened -->
 <div class="row row-sm">
 	<div class="col-xl-12">

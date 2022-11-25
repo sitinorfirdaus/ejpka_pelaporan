@@ -47,7 +47,7 @@ a:hover {
 	padding: 12px 15px;
 	border: 1px solid #ccc;
 	background: rgb(67, 108, 231);
-	color: #666;
+	color: rgb(247, 243, 243);
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -176,7 +176,7 @@ a:hover {
 
 
 <div class="tab-content">
-  aa {{-- @include('mengurus/tab_jumlahkeseluruhan') --}}
+   {{-- @include('mengurus.tab_jumlahkeseluruhan') --}}
 </div>
 
 <div class="tab-content"> {{-- tab perbelanjaan melebih--}}
@@ -185,7 +185,8 @@ a:hover {
             <div class="card">
                 <div class="card-body">
         <form id="addUserForm" name="addUserForm" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" id="id">  <!--pull row id data -->
+            @csrf
+             <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                      <div class="form-group">
                          <div class="row">
@@ -393,7 +394,7 @@ $(document).ready(function () {
 
             success: function(data) {
                 $('#addUserForm').trigger("reset");
-                $('#modaldemo8').modal('hide');
+             //   $('#modaldemo8').modal('hide');
                 table.draw();
 
                 swal(

@@ -20,7 +20,7 @@ class EksekutifController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Eksekutif::latest()->get();
+            $data = Eksekutif::first()->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()

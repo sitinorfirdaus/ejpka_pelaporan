@@ -100,8 +100,8 @@
 <div class="row row-sm">
 	<div class="col-xl-14">
 		<div class="card">
-			<div class="card-body"><h2>RINGKASAN EKSEKUTIF</h2>
-                    <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
+			<div class="card-body"><h2>KEMASKINI RINGKASAN EKSEKUTIF</h2>
+                <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
                     <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                     <div class="form-group">
@@ -110,7 +110,7 @@
                                 <label class="form-label">Kementerian/Jabatan </label>
                             </div>
                             <div class="col-md-3">
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "MOF" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
                             </div>
                             </div>
                     </div>
@@ -121,13 +121,13 @@
                             </div>
                             <div class="col-md-3">
 
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "Suku kedua" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
                             </div>
                             <div class="col-md-2">
                                <label class="form-label">Tahun</label>
                            </div>
                                <div class="col-md-2">
-                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" value="2022" disabled />
+                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" disabled />
                                </div>
                            </div>
                         </div>
@@ -143,13 +143,11 @@
 <!--end row header-->
 
 
-{{-- @include('mengurus/form_validation_error') --}}
 <!-- row opened -->
 <div class="row row-sm">
 	<div class="col-xl-12">
 		<div class="card">
 			<div class="card-body">
-
                 Ringkasan eksekutif perlu mengandungi rumusan secara keseluruhan mengenai:-
                 <br/><br/><br/>
                 <form id="addUserForm" name="addUserForm" method="POST" enctype="multipart/form-data">
@@ -161,8 +159,7 @@
                                              <label class="form-label">3.1 Pengurusan Belanjawan: <span class="tx-danger">*</span></label>
                                          </div>
                                          <div class="col-md-3">
-                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value={{old('input1')}} ></textarea>
-
+                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" >{{ $bel->input1}}</textarea>
                                          </div>
                                          <div class="col-md-3">
                                             <label class="form-label">3.3 Pengurusan Perolehan:<span class="tx-danger">*</span></label>
@@ -315,6 +312,8 @@ $(document).ready(function () {
     // save record
     $('#saveBtn').click(function (e) {
         e.preventDefault();
+
+
         $(this).html('Simpan');
         $.ajax({
             data: $('#addUserForm').serialize(),

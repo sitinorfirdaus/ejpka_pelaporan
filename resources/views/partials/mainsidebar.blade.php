@@ -68,7 +68,7 @@
 
 
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#"><svg
+                <a class="side-menu__item" data-bs-toggle="slide" href="{{ url('ringkasan_eksekutif/index') }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M6 20h12V10H6v10zm6-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"
@@ -85,6 +85,9 @@
                      <ul class="slide-menu">
                         <li><a class="slide-item" href="{{ url('ringkasan_eksekutif/index') }}">Ringkasan Eksekutif</a></li>
                      </ul>
+                     {{-- <ul class="slide-menu">
+                        <li><a class="slide-item" href="{{ url('ringkasan_eksekutif/edit/{id}') }}">Ringkasan Eksekutif_2</a></li>
+                     </ul> --}}
 
                     <ul class="slide-menu">
                         <li class="slide">
@@ -97,6 +100,7 @@
                                 </svg><span class="side-menu__label">Pengurusan Belanjawan</span></a>
                                 <ul class="slide-menu">
                                 <li><a class="slide-item" href="{{ url('mengurus/index') }}">Laporan Perbelanjaan Mengurus</a></li>
+                                <li><a class="slide-item" href="{{ url('mengurus/senarai') }}">Senarai Perbelanjaan Mengurus</a></li>
                                 </ul>
                          </li>
                     </ul>
