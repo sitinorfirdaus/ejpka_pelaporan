@@ -97,11 +97,11 @@
 
 <!-- row header-->
 
-<div class="row row-sm">
+{{-- <div class="row row-sm"> --}}
 	<div class="col-xl-14">
 		<div class="card">
-			<div class="card-body"><h2>KEMASKINI RINGKASAN EKSEKUTIF</h2>
-                <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
+			<div class="card-body"><h2>RINGKASAN EKSEKUTIF</h2>
+                <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="">
                     <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                     <div class="form-group">
@@ -110,44 +110,50 @@
                                 <label class="form-label">Kementerian/Jabatan </label>
                             </div>
                             <div class="col-md-3">
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="jabatan" id="jabatan" value= "{{$user_jabatan->jabatan}}" disabled/>
                             </div>
+
+                            <div class="col-md-2">
+                                <label class="form-label">No Rujukan </label>
                             </div>
+                            <div class="col-md-2">
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "" disabled/>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="form-label">Laporan Suku Tahun </label>
                             </div>
                             <div class="col-md-3">
-
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="sukuan" id="sukuan" value= "{{$master->sukuan}}" disabled/>
                             </div>
                             <div class="col-md-2">
                                <label class="form-label">Tahun</label>
                            </div>
                                <div class="col-md-2">
-                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" disabled />
+                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="tahun" id="tahun" value="{{$master->tahun}}" disabled />
                                </div>
                            </div>
                         </div>
                     </div>
-
-
-
                  </form>
 			</div>
-		</div>
+		{{-- </div>
 	</div>
-</div>
+</div> --}}
 <!--end row header-->
 
 
+{{-- @include('mengurus/form_validation_error') --}}
 <!-- row opened -->
-<div class="row row-sm">
+{{-- <div class="row row-sm"> --}}
 	<div class="col-xl-12">
 		<div class="card">
 			<div class="card-body">
+
                 Ringkasan eksekutif perlu mengandungi rumusan secara keseluruhan mengenai:-
                 <br/><br/><br/>
                 <form id="addUserForm" name="addUserForm" method="POST" enctype="multipart/form-data">
@@ -159,7 +165,8 @@
                                              <label class="form-label">3.1 Pengurusan Belanjawan: <span class="tx-danger">*</span></label>
                                          </div>
                                          <div class="col-md-3">
-                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" >{{ $bel->input1}}</textarea>
+                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value="" ></textarea>
+
                                          </div>
                                          <div class="col-md-3">
                                             <label class="form-label">3.3 Pengurusan Perolehan:<span class="tx-danger">*</span></label>
@@ -223,7 +230,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('script-custom')
@@ -312,8 +319,6 @@ $(document).ready(function () {
     // save record
     $('#saveBtn').click(function (e) {
         e.preventDefault();
-
-
         $(this).html('Simpan');
         $.ajax({
             data: $('#addUserForm').serialize(),

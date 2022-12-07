@@ -11,6 +11,7 @@ class Mengurus extends Model
     protected $table = 'mengurus';
     protected $fillable =[
     'master_id',
+    'tarikh',
     'melebihi_penjelasan',
     'melebihi_tindakan',
     'kurang_penjelasan',

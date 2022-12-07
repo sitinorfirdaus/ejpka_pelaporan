@@ -28,6 +28,13 @@ class MengurusController extends Controller
             'id' => $request->id // bawak row id
         ];
 
+        $user = Auth::user();
+        $user_jabatan = User::select('id','jabatan')->orderBy('id','desc')->take(1)->first();
+        $master = Eksekutif::select('id','sukuan','tahun')->orderBy('id','desc')->take(1)->first();
+        $master_id = $master->id;
+        $mengurus = Mengurus::select('id','master_id','melebihi_penjelasan','melebihi_tindakan','kurang_penjelasan','kurang_tindakan')
+                            ->where('master_id',$master_id)
+                            ->orderBy('id','desc')->take(1)->first();
 
         if ($request->ajax()) {
 
@@ -47,7 +54,7 @@ class MengurusController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
        }
-        return view('mengurus/index');
+        return view('mengurus.index',compact('master','user_jabatan','mengurus'));
 
 
 
@@ -66,10 +73,13 @@ class MengurusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // paparkan form untuk create pengguna
+
     public function store(Request $request)
     {
 
-       // return $request;
+
         $user = Auth::user();
 
 
@@ -79,10 +89,38 @@ class MengurusController extends Controller
            ['id' => $request->id], //akan dapat row id from previous
             [
               'master_id' =>$master->id,//akan dapat row id drp table master
+              'tarikh' =>$request->tarikh,
                'melebihi_penjelasan'=>$request->melebihi_penjelasan,
                'melebihi_tindakan'=>$request->melebihi_tindakan,
                'kurang_penjelasan'=>$request->melebihi_penjelasan,
-               'kurang_tindakan'=>$request->melebihi_tindakan,
+               'kurang_tindakan'=>$request->kurang_tindakan,
+               'user_id' => $user->id // insert user id from session
+            ]
+        );
+
+       return response()->json(['success' => 'Save success']);
+    }
+
+
+
+    public function store_2(Request $request)
+    {
+
+
+        $user = Auth::user();
+
+
+        $master = Eksekutif::orderBy('id','desc')->take(1)->first();
+
+        Mengurus::updateOrCreate(
+           ['id' => $request->id], //akan dapat row id from previous
+            [
+              'master_id' =>$master->id,//akan dapat row id drp table master
+              'tarikh' =>$request->tarikh,
+               'melebihi_penjelasan'=>$request->melebihi_penjelasan,
+               'melebihi_tindakan'=>$request->melebihi_tindakan,
+               'kurang_penjelasan'=>$request->melebihi_penjelasan,
+               'kurang_tindakan'=>$request->kurang_tindakan,
                'user_id' => $user->id // insert user id from session
             ]
         );
@@ -133,19 +171,19 @@ class MengurusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = Auth::user();
-        $bel = Mengurus::find('id');
+        $where = [
+            'id' => $request->id // bawak row id
+        ];
 
-         $bel->update([
+        $bel = Mengurus::where($where)->update(['melebihi_penjelasan'=>'Updated title'])->first();
 
-            'name' =>$request->name,
+        // dd($bel);
 
-            'id_user' =>$user->id
-             ]);
+        return response()->json($bel);
 
-             return view('mengurus/update', compact('bel'));
+
     }
 
     /**
@@ -223,6 +261,43 @@ class MengurusController extends Controller
 
     }
 
+    public function tab2(Request $request)
+    {
+        $where = [
+            'id' => $request->id // bawak row id
+        ];
 
+        $user = Auth::user();
+        $user_jabatan = User::select('id','jabatan')->orderBy('id','desc')->take(1)->first();
+        $master = Eksekutif::select('id','sukuan','tahun')->orderBy('id','desc')->take(1)->first();
+        $master_id = $master->id;
+        $mengurus = Mengurus::select('id','master_id','melebihi_penjelasan','melebihi_tindakan','kurang_penjelasan','kurang_tindakan')
+                            ->where('master_id',$master_id)
+                            ->orderBy('id','desc')->take(1)->first();
+
+        if ($request->ajax()) {
+
+            $data = Mengurus::select('id', 'name')
+            ->where('id', $where)
+            ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Kemaskini</a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Padam</a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+       }
+        return view('mengurus/tab2',compact('master','user_jabatan','mengurus'));
+
+
+
+
+    }
 
 }

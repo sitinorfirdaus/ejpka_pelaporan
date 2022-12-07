@@ -11,6 +11,7 @@ use App\Models\Ringkasan_Eksekutif;
 use App\Models\Eksekutif;
 use DB;
 use App\Http\Requests\StoreRERequests;
+use App\Models\User;
 
 class RingkasanEksekutifController extends Controller
 {
@@ -38,10 +39,17 @@ class RingkasanEksekutifController extends Controller
         //         ->make(true);
         // }
 
+        $user = Auth::user();
+        $user_jabatan = User::select('id','jabatan')->orderBy('id','desc')->take(1)->first();
+
+        $master = Eksekutif::select('id','sukuan','tahun')->orderBy('id','desc')->take(1)->first();
         $users = Ringkasan_Eksekutif::all();
+        $master_id = $master->id;
+        $ringkasan = Ringkasan_Eksekutif::select('id','master_id','input1','input2','output1','input3','input4','output2')
+                    ->where('master_id',$master_id)
+                    ->orderBy('id','desc')->take(1)->first();
 
-
-        return view('ringkasanEksekutif/ringkasaneksekutif',compact('users'));
+        return view('ringkasanEksekutif/ringkasaneksekutif',compact('users','master','user_jabatan','ringkasan'));
 
         //return view('ringkasanEksekutif/ringkasaneksekutif');
     }
@@ -53,7 +61,7 @@ class RingkasanEksekutifController extends Controller
      */
     public function create()
     {
-        //
+        return view('ringkasanEksekutif.create');
     }
 
     /**
@@ -88,6 +96,11 @@ class RingkasanEksekutifController extends Controller
        // return response()->json(array('success' => true, 'last_insert_id' => $master->id), 200);
     }
 
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -111,21 +124,20 @@ class RingkasanEksekutifController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
 
 
-        // $where = [
-        //     'id' => $request->id // bawak row id
-        // ];
+        $where = [
+            'id' => $request->id // bawak row id
+        ];
 
-        $bel = Ringkasan_Eksekutif::select('id','input1')
-                ->where('id','=','1')
-                ->get();
+        $bel = Ringkasan_Eksekutif::where('$where')
+                ->first();
        // return($bel);
 
-       // return response()->json($bel);
-       return view('ringkasanEksekutif/ringkasaneksekutifEdit',compact('bel'));
+       return response()->json($bel);
+    //    return view('ringkasanEksekutif/ringkasaneksekutifEdit',compact('bel'));
     }
 
     /**

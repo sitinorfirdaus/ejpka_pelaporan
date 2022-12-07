@@ -19,6 +19,12 @@ class EksekutifController extends Controller
      */
     public function index(Request $request)
     {
+
+
+         $user = Auth::user();
+         $user_jabatan = User::select('id','jabatan')->orderBy('id','desc')->take(1)->first();
+         $master = Eksekutif::select('id','sukuan','tahun')->orderBy('id','desc')->take(1)->first();
+        // return $master;
         if ($request->ajax()) {
             $data = Eksekutif::first()->get();
 
@@ -34,7 +40,7 @@ class EksekutifController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('ringkasanEksekutif/index');
+        return view('ringkasanEksekutif.index',compact('master','user_jabatan'));
     }
 
     /**
@@ -78,9 +84,14 @@ class EksekutifController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
+        $user = Auth::user();
+        $user_jabatan = User::select('id','jabatan')->orderBy('id','desc')->take(1)->first();
+        $master = Eksekutif::select('id','sukuan','tahun')->orderBy('id','desc')->take(1)->first();
+
+       return view('ringkasanEksekutif.index',compact('master','user_jabatan'));
     }
 
     /**

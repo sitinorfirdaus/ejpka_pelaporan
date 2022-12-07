@@ -1,3 +1,4 @@
+
 @extends('layouts.mainlayout2')
 
 @section('content')
@@ -157,190 +158,107 @@
 </div> --}}
         <!--end row header-->
 
-        <div class="tabbed">
-            <input type="radio" id="tab1" name="css-tabs" checked>
-            <input type="radio" id="tab2" name="css-tabs">
-            <input type="radio" id="tab3" name="css-tabs">
-            <input type="radio" id="tab4" name="css-tabs">
 
 
-            <ul class="tabs">
-                <li class="tab"><label for="tab1">Laporan Pengesahan</label></li>
-                <li class="tab"><label for="tab2">Jumlah Keseluruhan</label></a></li>
-                <li class="tab"><label for="tab3">Perbelanjaan Melebihi</label></li>
-                <li class="tab"><label for="tab4">Perbelanjaan Kurang</label></li>
-            </ul>
+
+<form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="">
+    <div class="tabbed">
+        <input type="radio" id="tab1" name="css-tabs" checked>
+        <input type="radio" id="tab2" name="css-tabs">
+        <input type="radio" id="tab3" name="css-tabs">
+        <input type="radio" id="tab4" name="css-tabs">
 
 
-    <div class="tab-content">
-        <div class="row row-xl">
-            <div class="col-xl">
-                <div class="card">
-                    <div class="card-body" width="350px">
-                        <form id="addUserForm1" name="addUserForm1" method="GET" enctype="multipart/form-data"
-                            action="">
-                            <input type="hidden" name="id" id="id">
-                            <!--pull row id data -->
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Laporan Pengesahan Mengurus pada:</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input class="form-control" type="date"
-                                            data-parsley-class-handler="#fnWrapper" name="tarikh" id="tarikh"
-                                            value="{{ $mengurus->tarikh ?? '' }}" />
-                                    </div>
-                                </div>
+        <ul class="tabs">
+            <li class="tab"><label for="tab1">Laporan Pengesahan</label></li>
+            <li class="tab"><label for="tab2">Jumlah Keseluruhan</label></a></li>
+            <li class="tab"><label for="tab3">Perbelanjaan Melebihi</label></li>
+            <li class="tab"><label for="tab4">Perbelanjaan Kurang</label></li>
+        </ul>
 
 
-                                {{-- footer --}}
-                                <div class="modal-footer">
-                                    <button type="button" id="saveBtn1" name="saveBtn1"
-                                        class="btn ripple btn-primary">Simpan</button>
-                                    <button class="btn ripple btn-secondary" data-bs-dismiss="modal"
-                                        type="button">Kembali</button>
-                                </div> <!-- end of footer -->
-                        </form>
+        <div class="tab-content">
+
+                <input type="hidden" name="id" id="id">
+                <!--pull row id data -->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label">Laporan Pengesahan Mengurus pada:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="date" data-parsley-class-handler="#fnWrapper"
+                                name="tarikh" id="tarikh" value="{{ $mengurus->tarikh ?? '' }}" />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="saveBtn1" name="saveBtn1"
+                            class="btn ripple btn-primary">Simpan</button>
+                        <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Kembali</button>
+                    </div>
+                </div>
+        </div>
+
+                <div class="tab-content">
+                bbb
+                </div>
+
+                <div class="tab-content">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">Perbelanjaan melebihi peruntukan:RM X </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">Penjelasan:<span class="tx-danger">*</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
+                                    name="melebihi_penjelasan" id="melebihi_penjelasan">{{ $mengurus->melebihi_penjelasan ?? '' }}</textarea>
+                            </div>
+                        </div>
                     </div>
 
 
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-    <div class="tab-content">
-        {{-- @include('mengurus.tab2') --}}
-    </div>
-
-    <div class="tab-content"> {{-- tab perbelanjaan melebih --}}
-        <div class="row row-sm">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="addUserForm2" name="addUserForm2" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="id" id="id">
-                            <!--pull row id data -->
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Perbelanjaan melebihi peruntukan:RM X </label>
-                                    </div>
-                                </div>
+                    <div class="form-group ">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">Tindakan Penyelesaian<span
+                                        class="tx-danger">*</span></label>
                             </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Penjelasan:<span class="tx-danger">*</span></label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
-                                            name="melebihi_penjelasan" id="melebihi_penjelasan">{{ $mengurus->melebihi_penjelasan ?? '' }}</textarea>
-                                    </div>
-                                </div>
+                            <div class="col-md-3">
+                                <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
+                                    name="melebihi_tindakan" id="melebihi_tindakan">{{ $mengurus->melebihi_tindakan ?? '' }}</textarea>
                             </div>
-
-
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Tindakan Penyelesaian<span
-                                                class="tx-danger">*</span></label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
-                                            name="melebihi_tindakan" id="melebihi_tindakan">{{ $mengurus->melebihi_tindakan ?? '' }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- footer --}}
-                            <div class="modal-footer">
-                                <button type="button" id="saveBtn2" name="saveBtn2"
-                                    class="btn ripple btn-primary">Simpan</button>
-                                <button class="btn ripple btn-secondary" data-bs-dismiss="modal"
-                                    type="button">Kembali</button>
-                            </div> <!-- end of footer-->
-
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>{{-- end tab perbelanjaan melebihi --}}
 
+                    {{-- footer --}}
+                    <div class="modal-footer">
+                        <button type="button" id="saveBtn2" name="saveBtn2"
+                            class="btn ripple btn-primary">Simpan</button>
+                        <button class="btn ripple btn-secondary" data-bs-dismiss="modal"
+                            type="button">Kembali</button>
+                    </div> <!-- end of footer-->
 
-
-    <div class="tab-content"> {{-- tab perbelanjaan kurang --}}
-        <div class="row row-sm">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        Nyatakan penjelasan dan tindakan untuk perkara berikut:-
-                        <br /><br /><br />
-                        <form id="addUserForm3" name="addUserForm3" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id" id="id">
-                            <!--pull row id data -->
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="form-label">ii) Perbelanjaan kurang 95% atau melebihi 100% daripada
-                                            peruntukan di akhir tahun (Berakhir 31 Disember sahaja):RM X </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Penjelasan:<span class="tx-danger">*</span></label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
-                                            name="kurang_penjelasan" id="kurang_penjelasan">{{ $mengurus->kurang_penjelasan ?? '' }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Tindakan Penyelesaian<span
-                                                class="tx-danger">*</span></label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"
-                                            name="kurang_tindakan" id="kurang_tindakan">{{ $mengurus->kurang_tindakan ?? '' }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- footer --}}
-                            <div class="modal-footer">
-                                <button type="button" id="saveBtn3" name="saveBtn3"
-                                    class="btn ripple btn-primary">Simpan</button>
-                                <button class="btn ripple btn-secondary" data-bs-dismiss="modal"
-                                    type="button">Kembali</button>
-                            </div> <!-- end of footer -->
-
-                        </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>{{-- end tab perbelanjaan kurang --}}
 
 
-    </div><!-- end panel tab-->
+                    <div class="tab-content">
+                        dd
+                        </div>
+
+
+
+
+</form>
 @endsection
 
 @section('script-custom')
@@ -403,43 +321,43 @@
                 }
             });
 
-            // // when user click add new button
-            // $('#createNewUser').click(function() {
-            //     $('#error').removeClass('alert alert-danger');
-            //     $('#saveBtn').html('Simpan');
-            //     $('#modalHeading').html('Kekerapan Mesyuarat');
-            //     $('#id').val('');
-            //     $('#addUserForm').trigger("reset");
-            //     $('#modaldemo8').modal('show');
-            //     $('#error').html('');
-            // });
+            // when user click add new button
+            $('#createNewUser').click(function() {
+                $('#error').removeClass('alert alert-danger');
+                $('#saveBtn').html('Simpan');
+                $('#modalHeading').html('Kekerapan Mesyuarat');
+                $('#id').val('');
+                $('#addUserForm').trigger("reset");
+                $('#modaldemo8').modal('show');
+                $('#error').html('');
+            });
 
             // when user click edit button
-            // $('body').on('click', '.editBook', function() {
-            //     $('#error').removeClass('alert alert-danger');
-            //     $('#saveBtn').html('Simpan');
-            //     var id = $(this).data('id'); // row id
-            //     // var userid = $(this).data('user_id');
-            //     // alert(id);
-            //     //alert(userid); // undefined
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "{{ url('mengurus/edit') }}",
-            //         data: {
-            //             id: id
-            //         },
-            //         dataType: 'json',
-            //         success: function(data) {
-            //             $('#modalHeading').html('Kemaskini Maklumat');
-            //             $('#modaldemo8').modal('show');
-            //             $('#id').val(data.id);
-            //             $('#melebihi_penjelasan').val(data.melebihi_penjelasan);
-            //             $('#melebihi_tindakan').val(data.melebihi_tindakan);
-            //             //  $('#tarikh').val(data.tarikh);
-            //             $('#error').html('');
-            //         }
-            //     });
-            // })
+            $('body').on('click', '.editBook', function() {
+                $('#error').removeClass('alert alert-danger');
+                $('#saveBtn').html('Simpan');
+                var id = $(this).data('id'); // row id
+                // var userid = $(this).data('user_id');
+                // alert(id);
+                //alert(userid); // undefined
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('mengurus/edit') }}",
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#modalHeading').html('Kemaskini Maklumat');
+                        $('#modaldemo8').modal('show');
+                        $('#id').val(data.id);
+                        $('#melebihi_penjelasan').val(data.melebihi_penjelasan);
+                        $('#melebihi_tindakan').val(data.melebihi_tindakan);
+                        //  $('#tarikh').val(data.tarikh);
+                        $('#error').html('');
+                    }
+                });
+            })
 
             // save record tab 1
             $('#saveBtn1').click(function(e) {
@@ -484,6 +402,8 @@
             // save record tab 2
             $('#saveBtn2').click(function(e) {
                 e.preventDefault();
+
+
                 $(this).html('Simpan');
                 $.ajax({
                     data: $('#addUserForm2').serialize(),
@@ -513,8 +433,7 @@
                         })
                     }
                 });
-
-                 });
+            });
 
 
             // save record tab 3

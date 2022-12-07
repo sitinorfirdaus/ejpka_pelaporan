@@ -80,10 +80,11 @@
                     <li><a class="slide-item" href="{{ url('belanjawan/index') }}">Sample add 4.1</a></li>
                     </ul>
                     <ul class="slide-menu">
-                        <li><a class="slide-item" href="{{ url('master/index') }}">Kekerapan Mesyuarat</a></li>
+                        <li><a class="slide-item" href="{{ url('master/index') }}">Laporan Mesyuarat</a></li>
                      </ul>
                      <ul class="slide-menu">
-                        <li><a class="slide-item" href="{{ url('ringkasan_eksekutif/index') }}">Ringkasan Eksekutif</a></li>
+                        {{-- <li><a class="slide-item" href="{{ url('ringkasan_eksekutif/index') }}">Ringkasan Eksekutif</a></li> --}}
+                        <li><a class="slide-item" href="{{ url('ringkasan/create') }}">Ringkasan Eksekutif</a></li>
                      </ul>
                      {{-- <ul class="slide-menu">
                         <li><a class="slide-item" href="{{ url('ringkasan_eksekutif/edit/{id}') }}">Ringkasan Eksekutif_2</a></li>
@@ -100,7 +101,7 @@
                                 </svg><span class="side-menu__label">Pengurusan Belanjawan</span></a>
                                 <ul class="slide-menu">
                                 <li><a class="slide-item" href="{{ url('mengurus/index') }}">Laporan Perbelanjaan Mengurus</a></li>
-                                <li><a class="slide-item" href="{{ url('mengurus/senarai') }}">Senarai Perbelanjaan Mengurus</a></li>
+                                <li><a class="slide-item" href="{{ url('mengurus/tab2') }}">Senarai Perbelanjaan Mengurus</a></li>
                                 </ul>
                          </li>
                     </ul>

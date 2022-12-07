@@ -11,13 +11,13 @@ class Ringkasan_Eksekutif extends Model
     protected $table = 'ringkasan_eksekutif';
     protected $fillable = [
         'master_id',
-        'input1',
-        'input2',
-        'output1',
-        'input3',
-        'input4',
-        'output2',
-         'user_id'
+        'pengurusan_belanjawan',
+        'pengurusan_perakaunan',
+        'perakaunan_kewangan',
+        'perakaunan_pengurusan',
+        'pengurusan_perolehan',
+        'pengurusan_aset_stor',
+         'created_by'
 
     ];
 }

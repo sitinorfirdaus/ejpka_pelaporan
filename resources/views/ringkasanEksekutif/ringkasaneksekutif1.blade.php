@@ -97,11 +97,11 @@
 
 <!-- row header-->
 
-<div class="row row-sm">
+{{-- <div class="row row-sm"> --}}
 	<div class="col-xl-14">
 		<div class="card">
-			<div class="card-body"><h2>KEMASKINI RINGKASAN EKSEKUTIF</h2>
-                <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
+			<div class="card-body"><h2>RINGKASAN EKSEKUTIF</h2>
+                <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="">
                     <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                     <div class="form-group">
@@ -110,44 +110,50 @@
                                 <label class="form-label">Kementerian/Jabatan </label>
                             </div>
                             <div class="col-md-3">
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="jabatan" id="jabatan" value= "{{$user_jabatan->jabatan}}" disabled/>
                             </div>
+
+                            <div class="col-md-2">
+                                <label class="form-label">No Rujukan </label>
                             </div>
+                            <div class="col-md-2">
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "" disabled/>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="form-label">Laporan Suku Tahun </label>
                             </div>
                             <div class="col-md-3">
-
-                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" disabled/>
+                               <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="sukuan" id="sukuan" value= "{{$master->sukuan}}" disabled/>
                             </div>
                             <div class="col-md-2">
                                <label class="form-label">Tahun</label>
                            </div>
                                <div class="col-md-2">
-                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" disabled />
+                                  <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="tahun" id="tahun" value="{{$master->tahun}}" disabled />
                                </div>
                            </div>
                         </div>
                     </div>
-
-
-
                  </form>
 			</div>
-		</div>
+		{{-- </div>
 	</div>
-</div>
+</div> --}}
 <!--end row header-->
 
 
+{{-- @include('mengurus/form_validation_error') --}}
 <!-- row opened -->
-<div class="row row-sm">
+{{-- <div class="row row-sm"> --}}
 	<div class="col-xl-12">
 		<div class="card">
 			<div class="card-body">
+
                 Ringkasan eksekutif perlu mengandungi rumusan secara keseluruhan mengenai:-
                 <br/><br/><br/>
                 <form id="addUserForm" name="addUserForm" method="POST" enctype="multipart/form-data">
@@ -159,13 +165,14 @@
                                              <label class="form-label">3.1 Pengurusan Belanjawan: <span class="tx-danger">*</span></label>
                                          </div>
                                          <div class="col-md-3">
-                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" >{{ $bel->input1}}</textarea>
+                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1"  >{{$ringkasan->input1 ?? ''}}</textarea>
+
                                          </div>
                                          <div class="col-md-3">
                                             <label class="form-label">3.3 Pengurusan Perolehan:<span class="tx-danger">*</span></label>
                                         </div>
                                             <div class="col-md-3">
-                                               <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input4" id="input4"></textarea>
+                                               <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input4" id="input4">{{$ringkasan->input4 ?? ''}}</textarea>
                                             </div>
                                      </div>
                                  </div>
@@ -177,13 +184,13 @@
                                              <label class="form-label">3.2 Pengurusan Perakaunan:<span class="tx-danger">*</span></label>
                                          </div>
                                              <div class="col-md-3">
-                                                <textarea class="form-control" row="5" col="10"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" ></textarea>
+                                                <textarea class="form-control" row="5" col="10"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" >{{$ringkasan->input2 ?? ''}}</textarea>
                                              </div>
                                              <div class="col-md-3">
                                                 <label class="form-label">3.4 Pengurusan Aset dan Stor:<span class="tx-danger">*</span></label>
                                             </div>
                                                 <div class="col-md-3">
-                                                   <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="output2" id="output2"></textarea>
+                                                   <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="output2" id="output2">{{$ringkasan->output2 ?? ''}}</textarea>
                                                 </div>
                                          </div>
                                  </div>
@@ -196,7 +203,7 @@
                                              <label class="form-label">3.2.1 Perakaunan Kewangan:<span class="tx-danger">*</span></label>
                                          </div>
                                              <div class="col-md-3">
-                                                <textarea class="form-control" row="5" col="10"  data-parsley-class-handler="#fnWrapper"  name="output1" id="output1"></textarea>
+                                                <textarea class="form-control" row="5" col="10"  data-parsley-class-handler="#fnWrapper"  name="output1" id="output1">{{$ringkasan->output1 ?? ''}}</textarea>
                                              </div>
                                          </div>
                                  </div>
@@ -207,7 +214,7 @@
                                              <label class="form-label">3.2.2 Perakaunan Pengurusan:<span class="tx-danger">*</span></label>
                                          </div>
                                              <div class="col-md-3">
-                                                <textarea class="form-control" row="5" col="10" id="input3"name="input3" class="form-control"></textarea>
+                                                <textarea class="form-control" row="5" col="10" id="input3"name="input3" class="form-control">{{$ringkasan->input3 ?? ''}}</textarea>
                                              </div>
                                          </div>
                                  </div>
@@ -215,6 +222,7 @@
 
                              {{-- footer --}}
                              <div class="modal-footer">
+
                                  <button type="button" id="saveBtn" name="saveBtn" class="btn ripple btn-primary" >Simpan</button>
                                  <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Kembali</button>
                              </div> <!-- end of footer -->
@@ -223,7 +231,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('script-custom')
@@ -285,7 +293,8 @@ $(document).ready(function () {
     });
 
     // when user click edit button
-    $('body').on('click', '.editBook', function() {
+
+    $('body').on('click', '.editBtn', function() {
         $('#error').removeClass('alert alert-danger');
         $('#saveBtn').html('Simpan');
         var id = $(this).data('id'); // row id
@@ -299,21 +308,19 @@ $(document).ready(function () {
             dataType: 'json',
             success: function(data) {
                 $('#modalHeading').html('Kemaskini Maklumat');
-                $('#modaldemo8').modal('show');
+           //     $('#modaldemo8').modal('show');
                 $('#id').val(data.id);
-                $('#sukuan').val(data.sukuan);
-                $('#tahun').val(data.tahun);
-                $('#tarikh').val(data.tarikh);
+                $('#input1').val(data.input1);
+                // $('#tahun').val(data.tahun);
+                // $('#tarikh').val(data.tarikh);
                 $('#error').html('');
             }
         });
-    })
+
 
     // save record
     $('#saveBtn').click(function (e) {
         e.preventDefault();
-
-
         $(this).html('Simpan');
         $.ajax({
             data: $('#addUserForm').serialize(),
@@ -323,7 +330,7 @@ $(document).ready(function () {
 
             success: function(data) {
                 $('#addUserForm').trigger("reset");
-                $('#modaldemo8').modal('hide');
+               // $('#modaldemo8').modal('hide');
                 table.draw();
 
                 swal(
@@ -385,45 +392,6 @@ $(document).ready(function () {
 
 
 
-// save record tab_ringkasan_eksekutif
-    $('#saveBtn2').click(function (e) {
-        e.preventDefault();
-
-
-        $(this).html('Simpan');
-        $.ajax({
-            data: $('#addFormRE').serialize(),
-            url: "{{ url('ringkasan_eksekutif/store') }}",
-            type: "POST",
-            dataType: 'json',
-
-            success: function(data) {
-                $('#addFormRE').trigger("reset");
-
-                table.draw();
-
-                swal(
-                    {
-                        title: 'Berjaya!',
-                        text: 'Data telah disimpan',
-                        type: 'success',
-                        confirmButtonColor: '#57a94f'
-                    }
-		        );
-            },
-
-            error: function(reject) {
-                $('#error').addClass('alert alert-danger');
-                var response = $.parseJSON(reject.responseText);
-
-                $.each(response.errors, function(key, val) {
-                    $('#error').append('<li>' + val + '</li>');
-                })
-            }
-        });
-    });
-
-</script>
 
 
 <script>

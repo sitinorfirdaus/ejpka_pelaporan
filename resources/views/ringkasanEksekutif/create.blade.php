@@ -150,7 +150,7 @@
 			<div class="card-body">
                 Ringkasan eksekutif perlu mengandungi rumusan secara keseluruhan mengenai:-
                 <br/><br/><br/>
-                <form id="addUserForm" name="addUserForm" method="POST" enctype="multipart/form-data">
+                <form id="addForm" name="addForm" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                                  <div class="form-group">
@@ -159,9 +159,9 @@
                                              <label class="form-label">3.1 Pengurusan Belanjawan: <span class="tx-danger">*</span></label>
                                          </div>
                                          <div class="col-md-3">
-                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" >{{ $bel->input1}}</textarea>
+                                            <textarea class="form-control" row="5" col="10" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" ></textarea>
                                          </div>
-                                         <div class="col-md-3">
+                                         {{-- <div class="col-md-3">
                                             <label class="form-label">3.3 Pengurusan Perolehan:<span class="tx-danger">*</span></label>
                                         </div>
                                             <div class="col-md-3">
@@ -211,7 +211,7 @@
                                              </div>
                                          </div>
                                  </div>
-
+ --}}
 
                              {{-- footer --}}
                              <div class="modal-footer">
@@ -238,7 +238,6 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
-
 
 
 <script type="text/javascript">
@@ -316,13 +315,13 @@ $(document).ready(function () {
 
         $(this).html('Simpan');
         $.ajax({
-            data: $('#addUserForm').serialize(),
+            data: $('#addForm').serialize(),
             url: "{{ url('ringkasan_eksekutif/store') }}",
             type: "POST",
             dataType: 'json',
 
             success: function(data) {
-                $('#addUserForm').trigger("reset");
+                $('#addForm').trigger("reset");
                 $('#modaldemo8').modal('hide');
                 table.draw();
 
@@ -384,46 +383,6 @@ $(document).ready(function () {
 });
 
 
-
-// save record tab_ringkasan_eksekutif
-    $('#saveBtn2').click(function (e) {
-        e.preventDefault();
-
-
-        $(this).html('Simpan');
-        $.ajax({
-            data: $('#addFormRE').serialize(),
-            url: "{{ url('ringkasan_eksekutif/store') }}",
-            type: "POST",
-            dataType: 'json',
-
-            success: function(data) {
-                $('#addFormRE').trigger("reset");
-
-                table.draw();
-
-                swal(
-                    {
-                        title: 'Berjaya!',
-                        text: 'Data telah disimpan',
-                        type: 'success',
-                        confirmButtonColor: '#57a94f'
-                    }
-		        );
-            },
-
-            error: function(reject) {
-                $('#error').addClass('alert alert-danger');
-                var response = $.parseJSON(reject.responseText);
-
-                $.each(response.errors, function(key, val) {
-                    $('#error').append('<li>' + val + '</li>');
-                })
-            }
-        });
-    });
-
-</script>
 
 
 <script>

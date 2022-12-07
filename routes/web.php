@@ -12,6 +12,7 @@ use App\Http\Controllers\BelanjawanController;
 use App\Http\Controllers\MengurusController;
 use App\Http\Controllers\EksekutifController;
 use App\Http\Controllers\RingkasanEksekutifController;
+use App\Http\Controllers\RingkasanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,12 +68,13 @@ Route::prefix('belanjawan')->group(function () {
 Route::prefix('mengurus')->group(function () {
     Route::get('index', [MengurusController::class, 'index']);
     Route::post('store', [MengurusController::class, 'store']);
+    Route::post('stor_2', [MengurusController::class, 'store_2']);
     Route::post('edit', [MengurusController::class, 'edit']);
     Route::delete('destroy', [MengurusController::class, 'destroy']);
-    Route::post('update/{id}', [MengurusController::class, 'update']);
+    Route::post('update', [MengurusController::class, 'update']);
     Route::get('form', [MengurusController::class, 'form']);
-//Route::post('form',[MengurusController::class, 'form']);
-Route::get('store2', [MengurusController::class, 'store2']);
+    Route::get('tab2', [MengurusController::class, 'tab2']);
+
 });
 
 
@@ -82,11 +84,12 @@ Route::prefix('master')->group(function () {
     Route::post('edit', [EksekutifController::class, 'edit']);
     Route::delete('destroy', [EksekutifController::class, 'destroy']);
     Route::post('update/{id}', [EksekutifController::class, 'update']);
-    Route::get('form', [MengurusController::class, 'form']);
+    Route::get('show', [EksekutifController::class, 'show']);
 
 });
 
 Route::prefix('ringkasan_eksekutif')->group(function () {
+    Route::get('create', [RingkasanEksekutifController::class, 'create']);
     Route::get('index', [RingkasanEksekutifController::class, 'index']);
     Route::post('store', [RingkasanEksekutifController::class, 'store']);
    // Route::post('edit', [RingkasanEksekutifController::class, 'edit']);
@@ -96,5 +99,24 @@ Route::prefix('ringkasan_eksekutif')->group(function () {
     Route::get('form', [RingkasanEksekutifController::class, 'form']);
 });
 
+// Ringkasan Module
+
+// Route::get('/ringkasan', [RingkasanController::class, 'index'])->name('ringkasan.index');
+// Route::get('/ringkasan/create', [RingkasanController::class, 'create'])->name('ringkasan.create');
+// Route::post('/ringkasan/create', [RingkasanController::class, 'store'])->name('ringkasan.store');
+// Route::get('/ringkasan/show/{id}', [RingkasanController::class, 'show'])->name('ringkasan.show');
+// Route::get('/ringkasan/edit/{id}', [RingkasanController::class, 'edit'])->name('ringkasan.edit');
+// Route::post('/ringkasan/edit/{id}', [RingkasanController::class, 'update'])->name('ringkasan.update');
+// Route::get('/ringkasan/destroy/{id}', [RingkasanController::class, 'destroy'])->name('ringkasan.destroy');
+
+
+Route::get('ringkasan/create', [RingkasanController::class, 'create'])->name('create');
+Route::post('/ringkasan/create', [RingkasanController::class, 'store'])->name('create');
+Route::get('/list', [RingkasanController::class, 'index'])->name('list');
+Route::get('edit-ringkasan/{id}', [RingkasanController::class, 'edit'])->name('edit');
+Route::post('update-ringkasan/{id}', [RingkasanController::class, 'update'])->name('update');
+Route::get('delete-ringkasan/{id}', [RingkasanController::class, 'destroy'])->name('delete');
+Route::get('ringkasan/edit2', [RingkasanController::class, 'edit2'])->name('edit2');
+// Route::get('ringkasan/show', [RingkasanController::class, 'show'])->name('show');
 
 

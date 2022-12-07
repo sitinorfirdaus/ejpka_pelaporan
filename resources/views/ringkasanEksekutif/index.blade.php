@@ -119,12 +119,12 @@
     </ul>
 
 <div class="tab-content">--}}
+    {{-- <div class="row row-sm"> --}}
 
-    <div class="row row-sm">
         <div class="col-xl-14">
             <div class="card">
                 <div class="card-body"><h2>KEKERAPAN MESYUARAT</h2>
-                        <form id="addUserForm#" name="addUserForm#" method="GET" enctype="multipart/form-data" action="{{url('ringkasanEksekutif/edit{"id"}') }}">
+                        <form id="addUserForm" name="addUserForm" method="GET" enctype="multipart/form-data" action="{{url('master/show')}}">
                         <input type="hidden" name="id" id="id">  <!--pull row id data -->
 
                         <div class="form-group">
@@ -133,46 +133,44 @@
                                     <label class="form-label">Kementerian/Jabatan </label>
                                 </div>
                                 <div class="col-md-3">
-                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "MOF" disabled/>
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="jabatan" id="jabatan" value= "{{$user_jabatan->jabatan}}" disabled/>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label class="form-label">No Rujukan </label>
                                 </div>
-                                <div class="col-md-3">
-                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "MOF" disabled/>
+                                <div class="col-md-2">
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "" disabled/>
                                 </div>
-                                </div>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-label">Laporan Suku Tahun </label>
                                 </div>
                                 <div class="col-md-3">
-
-                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="input1" id="input1" value= "Suku kedua" disabled/>
+                                   <input class="form-control" data-parsley-class-handler="#fnWrapper"  name="sukuan" id="sukuan" value= "{{old('$master->sukuan')}}" disabled/>
                                 </div>
                                 <div class="col-md-2">
                                    <label class="form-label">Tahun</label>
                                </div>
                                    <div class="col-md-2">
-                                      <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="input2" id="input2" value="2022" disabled />
+                                      <input class="form-control"  data-parsley-class-handler="#fnWrapper"  name="tahun" id="tahun" value="{{old('$master->tahun')}}" disabled />
                                    </div>
                                </div>
-
-
                             </div>
                         </div>
                      </form>
                 </div>
-            </div>
-        </div>
-    </div>
+            {{-- </div>
+        </div> --}}
+    {{-- </div> --}}
 
 <!-- row opened -->
-<div class="row row-sm">
-	<div class="col-xl-12">
+{{-- <div class="row row-sm"> --}}
+	<div class="col-xl-14">
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
@@ -183,6 +181,7 @@
 								<th class="wd-5p border-bottom-0">Bil</th>
 								<th class="wd-10p border-bottom-0">Laporan Suku Tahun</th>
                                 <th class="wd-10p border-bottom-0">Tarikh Mesyuarat</th>
+                                <th class="wd-10p border-bottom-0">Tahun</th>
                                 <th class="wd-10p border-bottom-0">Tindakan</th>
 							</tr>
 						</thead>
@@ -194,7 +193,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+{{-- </div> --}}
 
 <!-- Modal effects -->
 <div class="modal fade" id="modaldemo8">
@@ -223,11 +222,11 @@
                                 <label class="form-label">Laporan Suku Tahun<span class="tx-danger">*</span></label>
                             </div>
                             <div class="col-md-9">
-                                <select name="sukuan" id="sukuan" class="form-control"  value="">
+                                <select name="sukuan" id="sukuan" class="form-control">
                                     <option value="">Sila Pilih Suku Tahun</option>
                                     <option value="1">Suku Pertama</option>
                                     <option value="2">Suku Kedua</option>
-                                    <option value="3">Suke Ketiga</option>
+                                    <option value="3">Suku Ketiga</option>
                                     <option value="4">Suku Keempat</option>
                                    </select>
 
@@ -323,8 +322,8 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'sukuan', name: 'sukuan'},
-            // {data: 'tahun', name: 'tahun'},
             {data: 'tarikh', name: 'tarikh'},
+            {data: 'tahun', name: 'tahun'},
             {data: 'action', name: 'action'},
         ],
 
@@ -354,9 +353,9 @@ $(document).ready(function () {
         $('#error').removeClass('alert alert-danger');
         $('#saveBtn').html('Simpan');
         var id = $(this).data('id'); // row id
-       // var userid = $(this).data('user_id');
-       // alert(id);
-        //alert(userid); // undefined
+        //var userid = $(this).data('user_id');
+        //alert(id);
+       // alert(userid); // undefined
         $.ajax({
             type:"POST",
             url: "{{ url('master/edit') }}",
